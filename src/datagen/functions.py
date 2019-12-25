@@ -44,7 +44,7 @@ class Value:
 
 		return f"Value {self.value}"
 	
-	def tex(self, _):
+	def tex(self, parent_priority: int):
 
 		return str(self.value)
 
@@ -60,7 +60,7 @@ class Matrix(Value):
 
 		return len(self.value.squeeze()) == 1
 
-	def tex(self, _):
+	def tex(self, parent_priority: int):
 
 		left = r"\left[\begin{array}"
 		right = r"\end{array}\right]"
@@ -146,7 +146,7 @@ class Sin(Function):
 		return np.sin(x)
 	
 	def tex(self, parent_priority: int = 3):
-		return f"\\sin{self.leftpar}{self.args[0].tex(self.priority)}{self.rightpar}"
+		return f"\\sin{self.leftpar}{self.args[0].tex(0)}{self.rightpar}"
 
 if __name__ == "__main__":
 	# Test 2 + sin(3 * (4 + 2))
